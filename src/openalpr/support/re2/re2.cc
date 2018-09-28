@@ -1193,7 +1193,7 @@ static bool parse_double_float(const char* str, int n, bool isfloat, void *dest)
   errno = 0;
   double r;
   if (isfloat) {
-    r = strtof(str, &end);
+    r = (float)strtod(str, &end);
   } else {
     r = strtod(str, &end);
   }
