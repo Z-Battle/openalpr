@@ -10,6 +10,10 @@
 #include <stdio.h>  /* for fwrite */
 #include <sstream>
 
+#ifdef ANDROID
+#include <android/log.h>
+#endif
+
 // Debug-only checking.
 #define DCHECK(condition) assert(condition)
 #define DCHECK_EQ(val1, val2) assert((val1) == (val2))
@@ -55,7 +59,11 @@ class LogMessage {
     stream() << "\n";
     string s = str_.str();
     size_t n = s.size();
-    if (fwrite(s.data(), 1, n, stderr) < n) {}  // shut up gcc
+#ifndef ANDROID
+	if (fwrite(s.data(), 1, n, stderr) < n) {}  // shut up gcc
+#else
+	//TODO
+#endif
     flushed_ = true;
   }
   ~LogMessage() {
