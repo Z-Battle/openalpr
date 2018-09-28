@@ -37,7 +37,7 @@ namespace alpr
       return defaultValue;
     }
 
-    float val = atof(pszValue);
+    float val = strtod(pszValue, NULL);
     return val;
   }
   
@@ -55,7 +55,7 @@ namespace alpr
   // output all of the items
     CSimpleIniA::TNamesDepend::const_iterator i;
     for (i = values.begin(); i != values.end(); ++i) { 
-      response.push_back(atof(i->pItem));
+      response.push_back(strtod(i->pItem, NULL));
     }
     
     return response;
