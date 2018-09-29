@@ -41,7 +41,7 @@ namespace alpr
     char * locale = std::setlocale(LC_ALL, NULL);
     setlocale(LC_NUMERIC, "C");
 
-    float val = atof(pszValue);
+	float val = strtod(pszValue, NULL);
 
     std::setlocale(LC_NUMERIC, locale);
 
@@ -65,7 +65,7 @@ namespace alpr
       // output all of the items
     CSimpleIniA::TNamesDepend::const_iterator i;
     for (i = values.begin(); i != values.end(); ++i) {
-      response.push_back(atof(i->pItem));
+		response.push_back(strtod(i->pItem, NULL));
     }
 
     std::setlocale(LC_NUMERIC, locale);
